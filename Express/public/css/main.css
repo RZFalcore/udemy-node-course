@@ -1,0 +1,85 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 1rem;
+}
+
+.header {
+    width: 100%;
+    height: 3.5rem;
+    background-color: rgb(4, 199, 134);
+    padding: 0 1.5rem;
+}
+
+.header-nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav__list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.header-nav__list-item {
+    margin: 0 1.5rem;
+    padding: 0;
+
+}
+
+.header-nav__list-item a {
+    text-decoration: none;
+    color: white;
+}
+
+.header-nav__list-item a:hover,
+.header-nav__list-item a:active,
+.header-nav__list-item a.active {
+    color: aqua;
+}
+
+
+.product-form {
+    margin: 10px 30px;
+    min-width: 90%;
+    width: 20rem;
+}
+
+.form-contol {
+    margin: 2rem;
+}
+
+.form-contol label,
+.form-contol input {
+    display: block;
+    width: 100%;
+}
+
+.form-control input {
+    border: 1px solid rgb(4, 199, 134);
+    font: inherit;
+    border-radius: 2px;
+}
+
+button {
+    border: 1px solid rgb(4, 199, 134);
+    background: white;
+    color: black;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:active,
+button:hover {
+    background: rgb(4, 199, 134);
+    border: 1px solid black;
+    color: black;
+}
