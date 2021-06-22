@@ -9,7 +9,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-app.use(adminRouter);
+app.use("/admin", adminRouter);
 app.use(shopRouter);
 app.use(errorRouter);
 
