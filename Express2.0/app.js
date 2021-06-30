@@ -8,6 +8,11 @@ const errorRouter = require("./routes/error");
 
 const app = express();
 
+// PUG -----------------------
+app.set("view engine", "pug");
+app.set("views", "views");
+//----------------------------
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,  "public")));
