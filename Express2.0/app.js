@@ -2,7 +2,7 @@ const path = require("path");
 
 const express = require("express");
 
-const adminRouter = require("./routes/admin");
+const admin = require("./routes/admin");
 const shopRouter = require("./routes/shop");
 const errorRouter = require("./routes/error");
 
@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,  "public")));
 
-app.use("/admin", adminRouter);
+app.use("/admin", admin.router);
 app.use(shopRouter);
 app.use(errorRouter);
 
