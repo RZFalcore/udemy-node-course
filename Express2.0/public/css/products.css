@@ -31,6 +31,7 @@ button {
 
 button:hover,
 button:active {
-    background-color: #3e00a1;
+    background-color: #dbc441;
+    border: 1px solid #dbc441;
     color: white;
 }

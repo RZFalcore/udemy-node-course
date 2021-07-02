@@ -45,14 +45,23 @@ main {
 .main-header__item a.active {
     color: #3e00a1;
 }
+.wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: nowrap;
+}
+
 .card__product-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 300px;
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 2px 0px;
+    margin: 10px 20px;
 }
 
 
@@ -61,13 +70,15 @@ main {
     align-items: center;
     flex-direction: column-reverse;
     margin-top: 4px;
+    width: 100%;
 }
 
 .card__title {
     width: 100%;
-    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     text-align: center;
     text-transform: uppercase;
+    margin: 0px;
 }
 
 .card__img {
@@ -97,6 +108,7 @@ main {
 
 .card__btn {
     padding: 6px 12px;
+    margin: 10px 0px;
     border: 0;
     background-color: #dbc441;
     color: white;
