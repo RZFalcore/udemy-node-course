@@ -7,11 +7,12 @@
     <title><%= docTitle%></title>
 </head>
 <body>
+    <%- include("header.ejs") %>
     <h1>Users</h1>
     <ul>
         <% users.forEach(user => { %>
-            <li><%= user.name %></li>
-        <% )} %>
+            <li><%= user.userName %></li>
+        <% }) %>
     </ul>
 </body>
 </html>
