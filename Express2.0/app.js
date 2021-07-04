@@ -2,9 +2,9 @@ const path = require("path");
 
 const express = require("express");
 
-const admin = require("./routes/admin");
-const shopRouter = require("./routes/shop");
-const errorRouter = require("./routes/error");
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const errorRoutes = require("./routes/error");
 
 const app = express();
 
@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,  "public")));
 
-app.use("/admin", admin.router);
-app.use(shopRouter);
-app.use(errorRouter);
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+app.use(errorRoutes);
 
 app.listen(3000);
