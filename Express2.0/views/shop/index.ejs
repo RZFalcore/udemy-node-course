@@ -1,0 +1,29 @@
+<%- include("../includes/head.ejs", {docTitle: docTitle}) %>
+</head>
+<body>
+    <%- include("../includes/navigation.ejs") %>
+    <main>
+       <% if (products.length > 0) { %>
+        <div class="wrap">
+            <% products.forEach(product => { %>
+                <article class="card__product-item">
+                    <header class="card__header">
+                        <h2 class="card__title"><%= product.title %></h2> 
+                    </header> 
+                    <img class="card__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png" alt="Image" srcset=""/>
+                    <div class="card__content">
+                        <h3 class="card__price">Price: 10.00$</h3> 
+                        <p class="card__description">Lorem ipsum dolor sit.</p> 
+                        <div class="card__actions" >
+                            <button class="card__btn">Add to cart</button>  
+                        </div> 
+                    </div>
+                </article> 
+            <% }) %>
+        </div>
+                    <% } else { %>
+            <h1>No products yet...</h1> 
+        <% } %>
+
+            </main>
+<%- include("../includes/end.ejs") %>
