@@ -2,7 +2,7 @@ const Product = require("../models/product");
 
 exports.getShop = (req, res, next) => {
   Product.getAll((products) => {
-    res.render("shop/products-list", { products, docTitle: "Shop", path: "/" });
+    res.render("shop/index", { products, docTitle: "Shop", path: "/" });
   });
 };
 
@@ -18,4 +18,9 @@ exports.getProducts = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   res.render("shop/cart", { docTitle: "Cart", path: "/cart" });
+};
+
+exports.getCheckout = (req, res, next) => {
+  console.log("Checkout");
+  res.redirect("/");
 };
