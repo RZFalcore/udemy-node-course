@@ -15,7 +15,10 @@
                         <h3 class="card__price">$ <%= product.price %></h3> 
                         <p class="card__description"><%= product.description %></p> 
                         <div class="card__actions" >
-                            <button class="card__btn">Add to cart</button>  
+                            <a href="/admin/edit-product" class="card__btn">Edit</button>
+                                <form action="/admin/delete-product" method="post">
+                                    <button class="card__btn" type="submit">Delete</button>  
+                                </form>  
                         </div> 
                     </div>
                 </article> 
