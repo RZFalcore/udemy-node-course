@@ -31,6 +31,12 @@ exports.getCart = (req, res, next) => {
   res.render("shop/cart", { docTitle: "Cart", path: "/cart" });
 };
 
+exports.postCart = (req, res, next) => {
+  const id = req.body.productId;
+  console.log(id);
+  res.redirect("/cart");
+};
+
 exports.getOrders = (req, res, next) => {
   res.render("shop/orders", { docTitle: "Orders", path: "/orders" });
 };
