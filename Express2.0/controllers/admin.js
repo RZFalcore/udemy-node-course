@@ -46,3 +46,5 @@ exports.getEditProduct = (req, res, next) => {
     });
   })
 };
+
+exports.postEditProduct = (req, res, next) => {};
