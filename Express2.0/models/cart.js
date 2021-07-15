@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const fs = require("fs");
 const path = require("path");
 
@@ -28,6 +27,12 @@ module.exports = class Cart {
       }
       cart.totalPrice += +productPrice;
       fs.writeFile(pathToCart, JSON.stringify(cart), (err) => console.log(err));
+    });
+  }
+
+  static deleteProduct(id, price) {
+    fs.readFile(pathToCart, (err, data) => {
+      //
     });
   }
 };
