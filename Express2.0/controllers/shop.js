@@ -29,7 +29,27 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  res.render("shop/cart", { docTitle: "Cart", path: "/cart" });
+  Cart.getCart((cart) => {
+    Product.getAll((products) => {
+      const cartProducts = [];
+      products.map((product) => {
+        const cartProductData = cart.products.find(
+          (prod) => +prod.id === +product.id
+        );
+        if (cartProductData) {
+          cartProducts.push({
+            productData: product,
+            productQty: cartProductData.qty,
+          });
+        }
+      });
+      res.render("shop/cart", {
+        docTitle: "Cart",
+        path: "/cart",
+        products: cartProducts,
+      });
+    });
+  });
 };
 
 exports.postCart = (req, res, next) => {
