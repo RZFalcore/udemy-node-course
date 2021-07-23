@@ -5,11 +5,12 @@ const express = require("express");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const errorRoutes = require("./routes/error");
+const database = require("./utils/database");
 
 const app = express();
-
 app.set("view engine", "ejs");
 app.set("views", "views");
+database.execute("SELECT * FROM products");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
