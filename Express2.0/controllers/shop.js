@@ -23,13 +23,15 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
-  Product.getById(productId, (product) => {
-    res.render("shop/product-details", {
-      product,
-      docTitle: "Details",
-      path: "products",
-    });
-  });
+  Product.getById(productId)
+    .then(([product]) => {
+      res.render("shop/product-details", {
+        product: product[0],
+        docTitle: "Details",
+        path: "products",
+      });
+    })
+    .catch((e) => console.log(e));
 };
 
 exports.getCart = (req, res, next) => {
