@@ -10,13 +10,15 @@ exports.getShop = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.getAll((products) => {
-    res.render("shop/products-list", {
-      products,
-      docTitle: "Products",
-      path: "/products-list",
-    });
-  });
+  Product.getAll()
+    .then(([products]) => {
+      res.render("shop/products-list", {
+        products,
+        docTitle: "Products",
+        path: "/products-list",
+      });
+    })
+    .catch((e) => console.log(e));
 };
 
 exports.getProduct = (req, res, next) => {
