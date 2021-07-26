@@ -3,13 +3,15 @@ const Product = require("../models/product");
 //PRODUCTS
 
 exports.getProducts = (req, res, next) => {
-  Product.getAll((products) => {
-    res.render("admin/products", {
-      products,
-      docTitle: "Products",
-      path: "/admin/products",
-    });
-  });
+  Product.findAll()
+    .then((products) => {
+      res.render("admin/products", {
+        products,
+        docTitle: "Products",
+        path: "/admin/products",
+      });
+    })
+    .catch((e) => console.log(e));
 };
 
 // ADD PRODUCTS
