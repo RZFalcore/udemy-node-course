@@ -2,16 +2,16 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.getShop = (req, res, next) => {
-  Product.getAll()
-    .then(([products, productsData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/index", { products, docTitle: "Shop", path: "/" });
     })
     .catch((e) => console.log(e));
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.getAll()
-    .then(([products]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/products-list", {
         products,
         docTitle: "Products",
