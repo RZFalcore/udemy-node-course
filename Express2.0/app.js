@@ -18,10 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/admin", adminRoutes);
-app.use(shopRoutes);
-app.use(errorRoutes);
-
 app.use((req, res, next) => {
   User.findByPk(1)
     .then((user) => {
@@ -30,6 +26,11 @@ app.use((req, res, next) => {
     })
     .catch((e) => console.log(e));
 });
+
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+app.use(errorRoutes);
+
 
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
