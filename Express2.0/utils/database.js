@@ -8,13 +8,4 @@ const sequelize = new Sequelize(
   { dialect: "mysql", host: "localhost" }
 );
 
-// const mysql = require("mysql2");
-
-// const pool = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   database: "node_course",
-//   password: process.env.dbPass,
-// });
-
-// module.exports = pool.promise();
+module.exports = sequelize;
