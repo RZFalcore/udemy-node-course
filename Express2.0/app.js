@@ -7,6 +7,8 @@ const shopRoutes = require("./routes/shop");
 const errorRoutes = require("./routes/error");
 
 const sequelize = require("./utils/database");
+const Product = require("./models/product");
+const User = require("./models/user");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -20,7 +22,31 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(errorRoutes);
 
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((e) => console.log(e));
+});
+
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
+
 sequelize
   .sync()
-  .then(() => app.listen(3000))
+  .then(() => {
+    return User.findByPk(1);
+  })
+  .then((user) => {
+    if (!user) {
+      return User.create({ name: "Admin", email: "test@mail.com" });
+    }
+    return user;
+  })
+  .then((user) => {
+    // console.log(user);
+    app.listen(3000);
+  })
   .catch((e) => console.log(e));
