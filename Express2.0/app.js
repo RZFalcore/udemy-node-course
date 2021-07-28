@@ -9,6 +9,8 @@ const errorRoutes = require("./routes/error");
 const sequelize = require("./utils/database");
 const Product = require("./models/product");
 const User = require("./models/user");
+const Cart = require("./models/cart");
+const CartItem = require("./models/cart-item");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -31,12 +33,15 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(errorRoutes);
 
-
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     return User.findByPk(1);
   })
