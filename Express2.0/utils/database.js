@@ -1,11 +1,17 @@
-const Sequelize = require("sequelize");
-require("dotenv").config();
+// require("dotenv").config();
+// `${process.env.dbPass}`,
+const mongodb = require("mongodb");
+const MongoClient = mongodb.MongoClient;
 
-const sequelize = new Sequelize(
-  "node_course",
-  "root",
-  `${process.env.dbPass}`,
-  { dialect: "mysql", host: "localhost" }
-);
+const mongoConnect = (cb) => {
+  MongoClient.connect(
+    "mongodb+srv://User:dbPassword@cluster0.p2zd6.mongodb.net/udemyShop?retryWrites=true&w=majority"
+  )
+    .then((res) => {
+      console.log("Connected to db.");
+      cb(res);
+    })
+    .catch((e) => console.log(e));
+};
 
-module.exports = sequelize;
+module.exports = mongoConnect;
