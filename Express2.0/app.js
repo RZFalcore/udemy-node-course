@@ -2,9 +2,9 @@ const path = require("path");
 
 const express = require("express");
 
-// const adminRoutes = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 // const shopRoutes = require("./routes/shop");
-// const errorRoutes = require("./routes/error");
+const errorRoutes = require("./routes/error");
 
 const mongoConnect = require("./utils/database");
 
@@ -27,11 +27,10 @@ app.use((req, res, next) => {
   //   .catch((e) => console.log(e));
 });
 
-// app.use("/admin", adminRoutes);
+app.use("/admin", adminRoutes);
 // app.use(shopRoutes);
-// app.use(errorRoutes);
+app.use(errorRoutes);
 
-mongoConnect((client) => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(process.env.port);
 });
