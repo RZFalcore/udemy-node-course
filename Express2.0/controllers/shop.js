@@ -12,32 +12,33 @@ exports.getShop = (req, res, next) => {
     .catch((e) => console.log(e));
 };
 
-// // PRODUCTS
+// PRODUCTS
 
-// exports.getProducts = (req, res, next) => {
-//   Product.findAll()
-//     .then((products) => {
-//       res.render("shop/products-list", {
-//         products,
-//         docTitle: "Products",
-//         path: "/products-list",
-//       });
-//     })
-//     .catch((e) => console.log(e));
-// };
+exports.getProducts = (req, res, next) => {
+  Product.fetchAll()
+    .then((products) => {
+      res.render("shop/products-list", {
+        products,
+        docTitle: "Products",
+        path: "/products-list",
+      });
+    })
+    .catch((e) => console.log(e));
+};
 
-// exports.getProduct = (req, res, next) => {
-//   const productId = req.params.productId;
-//   Product.findByPk(productId)
-//     .then((product) => {
-//       res.render("shop/product-details", {
-//         product,
-//         docTitle: "Details",
-//         path: "products",
-//       });
-//     })
-//     .catch((e) => console.log(e));
-// };
+exports.getProduct = (req, res, next) => {
+  const productId = req.params.productId;
+
+  Product.fetchProduct(productId)
+    .then((product) => {
+      res.render("shop/product-details", {
+        product,
+        docTitle: "Details",
+        path: "products",
+      });
+    })
+    .catch((e) => console.log(e));
+};
 
 // // CART
 
