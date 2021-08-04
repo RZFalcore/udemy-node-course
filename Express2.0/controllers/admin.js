@@ -2,19 +2,17 @@ const Product = require("../models/product");
 
 //PRODUCTS
 
-// exports.getProducts = (req, res, next) => {
-//   // Product.findAll()
-//   req.user
-//     .getProducts()
-//     .then((products) => {
-//       res.render("admin/products", {
-//         products,
-//         docTitle: "Products",
-//         path: "/admin/products",
-//       });
-//     })
-//     .catch((e) => console.log(e));
-// };
+exports.getProducts = (req, res, next) => {
+  Product.fetchAll()
+    .then((products) => {
+      res.render("admin/products", {
+        products,
+        docTitle: "Products",
+        path: "/admin/products",
+      });
+    })
+    .catch((e) => console.log(e));
+};
 
 // ADD PRODUCTS
 exports.getAddProduct = (req, res, next) => {
