@@ -9,7 +9,13 @@ class Product {
   }
 
   save() {
-    //
+    const database = getDB();
+    // Creates or connects to products COLLECTION
+    return database
+      .collection("products")
+      .insertOne(this)
+      .then((result) => console.log(result))
+      .catch((e) => console.log(e));
   }
 }
 
