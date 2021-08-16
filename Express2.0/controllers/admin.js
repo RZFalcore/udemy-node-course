@@ -36,37 +36,44 @@ exports.postAddProduct = (req, res, next) => {
 
 // EDIT PRODUCT
 
-// exports.getEditProduct = (req, res, next) => {
-//   const productId = req.params.productId;
-//   const editFlag = req.query.edit;
-//   if (!editFlag) {
-//     res.redirect("/");
-//   }
-//   Product.findByPk(productId)
-//     .then((product) => {
-//       if (!product) res.redirect("/");
-//       res.render("admin/edit-product", {
-//         docTitle: "Edit product",
-//         path: "/admin/edit-product",
-//         edit: editFlag,
-//         product,
-//       });
-//     })
-//     .catch((e) => console.log(e));
-// };
+exports.getEditProduct = (req, res, next) => {
+  const productId = req.params.productId;
+  const editFlag = req.query.edit;
+  if (!editFlag) {
+    res.redirect("/");
+  }
+  Product.fetchProduct(productId)
+    .then((product) => {
+      if (!product) res.redirect("/");
 
-// exports.postEditProduct = (req, res, next) => {
-//   const { productId, title, imageUrl, price, description } = req.body;
-//   Product.findByPk(productId)
-//     .then((product) => {
-//       return product.update({ title, price, description, imageUrl });
-//     })
-//     .then(() => {
-//       console.log("Product updated!");
-//       res.redirect("/admin/products");
-//     })
-//     .catch((e) => console.log(e));
-// };
+      res.render("admin/edit-product", {
+        docTitle: "Edit product",
+        path: "/admin/edit-product",
+        edit: editFlag,
+        product,
+      });
+    })
+    .catch((e) => console.log(e));
+};
+
+exports.postEditProduct = (req, res, next) => {
+  const { productId, title, imageUrl, price, description } = req.body;
+
+  Product.fetchProduct(productId)
+    .then((product) => {
+      // return product.update({ title, price, description, imageUrl });
+      product.title = title;
+      product.imageUrl = imageUrl;
+      product.price = price;
+      product.description = description;
+      product.save();
+    })
+    .then(() => {
+      console.log("Product updated!");
+      res.redirect("/admin/products");
+    })
+    .catch((e) => console.log(e));
+};
 
 // DELETE PRODUCT
 
