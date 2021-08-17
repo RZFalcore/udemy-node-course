@@ -15,9 +15,9 @@ class Product {
     let dbOperation;
     if (this._id) {
       //Update product
-      dbOperation
+      dbOperation = database
         .collection("products")
-        .updateOne({ _id: new mongodb.ObjectId(this._id), {$set: this} );
+        .updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: this });
     } else {
       // Creates or connects to products COLLECTION
       dbOperation = database.collection("products").insertOne(this);
