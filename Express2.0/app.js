@@ -7,6 +7,7 @@ const shopRoutes = require("./routes/shop");
 const errorRoutes = require("./routes/error");
 
 const { mongoConnect } = require("./utils/database");
+const User = require("./models/user");
 
 require("dotenv").config();
 
@@ -19,12 +20,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  // User.findByPk(1)
-  //   .then((user) => {
-  //     req.user = user;
-  //     next();
-  //   })
-  //   .catch((e) => console.log(e));
+  User.findById("611b9bf415038dbe8b23d94d")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((e) => console.log(e));
   next();
 });
 
