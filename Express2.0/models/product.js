@@ -17,7 +17,7 @@ class Product {
       //Update product
       dbOperation = database
         .collection("products")
-        .updateOne({ _id:this._id }, { $set: this });
+        .updateOne({ _id: this._id }, { $set: this });
     } else {
       // Creates or connects to products COLLECTION
       dbOperation = database.collection("products").insertOne(this);
@@ -53,6 +53,17 @@ class Product {
         return product;
       })
       .catch((e) => console.log(e));
+  }
+
+  static delete(id) {
+    const database = getDB();
+    return database
+      .collection("products")
+      .deleteOne({ _id: new mongodb.ObjectId(id) })
+      .then(() => {
+        console.log("Product deleted.")
+      })
+      .catch(e => console.log(e));
   }
 }
 

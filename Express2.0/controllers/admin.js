@@ -80,14 +80,13 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 // DELETE PRODUCT
-// exports.postDeleteProduct = (req, res, next) => {
-//   const productId = req.body.productId;
+exports.postDeleteProduct = (req, res, next) => {
+  const productId = req.body.productId;
 
-//   Product.findByPk(productId)
-//     .then((prod) => prod.destroy())
-//     .then(() => {
-//       console.log("Product deleted.");
-//       res.redirect("/admin/products");
-//     })
-//     .catch((e) => console.log(e));
-// };
+  Product.delete(productId)
+    .then(() => {
+      console.log("Product deleted.");
+      res.redirect("/admin/products");
+    })
+    .catch((e) => console.log(e));
+};
