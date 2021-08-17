@@ -1,10 +1,6 @@
-const mongodb = require("mongodb");
 const Product = require("../models/product");
 
-const ID = mongodb.ObjectId;
-
 //PRODUCTS
-
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
     .then((products) => {
@@ -40,7 +36,6 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 // EDIT PRODUCT
-
 exports.getEditProduct = (req, res, next) => {
   const productId = req.params.productId;
   const editFlag = req.query.edit;
@@ -64,13 +59,7 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const { productId, title, imageUrl, price, description } = req.body;
 
-  const product = new Product(
-    title,
-    price,
-    description,
-    imageUrl,
-    new ID(productId)
-  );
+  const product = new Product(title, price, description, imageUrl, productId);
 
   product
     .save()
@@ -91,7 +80,6 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 // DELETE PRODUCT
-
 // exports.postDeleteProduct = (req, res, next) => {
 //   const productId = req.body.productId;
 
