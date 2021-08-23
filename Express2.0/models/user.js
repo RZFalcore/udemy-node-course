@@ -1,40 +1,45 @@
 const { getDB } = require("../utils/database");
 const mongodb = require("mongodb");
 class User {
-  constructor(userName, email, cart) {
+  constructor(userName, email, cart, id) {
     this.userName = userName;
     this.email = email;
-    this.cart = cart;
+    this.cart = cart ? cart : {}; //{items: [] }
     this._id = id;
+    this.cart.items = cart ? cart.items : [];
   }
 
   save() {
     const database = getDB();
-    const exists = database.collection("users").findOne({ email: this.email });
+    return database.collection("users").insert(this);
 
-    if (exists) {
-      return console.log("User already exists.");
-    } else {
-      return database
-        .collection("users")
-        .insertOne(this)
-        .then(() => {
-          console.log("User added");
-        })
-        .catch((e) => console.log(e));
-    }
+    // const database = getDB();
+    // const exists = database.collection("users").findOne({ email: this.email });
+    // if (exists) {
+    //   return console.log("User already exists.");
+    // } else {
+    //   return database
+    //     .collection("users")
+    //     .insertOne(this)
+    //     .then(() => {
+    //       console.log("User added");
+    //     })
+    //     .catch((e) => console.log(e));
+    // }
   }
 
   addToCart(product) {
     // const cartProduct = this.cart.items.findIndex(
     //   (cartProduct) => cartProduct._id === product._id
     // );
-    const updatedCart = { items: [{ ...product, quantity: 1 }] };
+    const updatedCart = {
+      items: [{ productId: new mongodb.ObjectId(product._id), quantity: 1 }],
+    };
     const database = getDB();
     return database
       .collection("users")
       .updateOne(
-        { _id: new mongodb.ObjectId(id) },
+        { _id: new mongodb.ObjectId(this._id) },
         { $set: { cart: updatedCart } }
       );
   }

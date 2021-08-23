@@ -59,10 +59,16 @@ exports.getProduct = (req, res, next) => {
 //     .catch((e) => console.log(e));
 // };
 
-// exports.postCart = (req, res, next) => {
-//   const id = req.body.productId;
-//   console.log("ID: ", id);
-//   let fetchedCart;
+exports.postCart = (req, res, next) => {
+  const id = req.body.productId;
+  Product.fetchProduct(id).then(product => {
+    return req.user.addToCart(product);
+  }).then(result => console.log(result));
+}
+
+
+  // console.log("ID: ", id);
+  // let fetchedCart;
 
 //   req.user
 //     .getCart()
