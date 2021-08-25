@@ -70,15 +70,6 @@ exports.postEditProduct = (req, res, next) => {
 
   product
     .save()
-    // Product.fetchProduct(productId)
-    //   .then((product) => {
-    //     // return product.update({ title, price, description, imageUrl });
-    //     product.title = title;
-    //     product.imageUrl = imageUrl;
-    //     product.price = price;
-    //     product.description = description;
-    //     product.save();
-    //   })
     .then(() => {
       console.log("Product updated!");
       res.redirect("/admin/products");

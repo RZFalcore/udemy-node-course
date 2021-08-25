@@ -1,6 +1,4 @@
 const Product = require("../models/product");
-// const Cart = require("../models/cart");
-// const Order = require("../models/order");
 
 // INDEX PAGE
 
@@ -74,7 +72,7 @@ exports.postDeleteCartItem = (req, res, next) => {
   });
 };
 
-// // ORDERS
+// ORDERS
 
 exports.getOrders = (req, res, next) => {
   req.user
