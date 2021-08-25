@@ -57,14 +57,16 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const id = req.body.productId;
-  Product.fetchProduct(id).then(product => {
-    return req.user.addToCart(product);
-  }).then(result => console.log(result));
-}
+  Product.fetchProduct(id)
+    .then((product) => req.user.addToCart(product))
+    .then((result) => {
+      console.log(result);
+      res.redirect("/cart");
+    });
+};
 
-
-  // console.log("ID: ", id);
-  // let fetchedCart;
+// console.log("ID: ", id);
+// let fetchedCart;
 
 //   req.user
 //     .getCart()
@@ -91,26 +93,29 @@ exports.postCart = (req, res, next) => {
 //     .catch((e) => console.log);
 // };
 
+exports.postDeleteCartItem = (req, res, next) => {
+  const id = req.body.productId;
 
+  req.user.deleteCartItem(id).then(() => {
+    console.log(`Product ID:${id} deleted.`);
+    res.redirect("/cart");
+  });
 
-// exports.postDeleteCartItem = (req, res, next) => {
-//   const id = req.body.productId;
+  // req.user
+  //   .getCart()
+  //   .then((cart) => cart.getProducts({ where: id }))
+  //   .then((products) => {
+  //     const product = products[0];
+  //     return product.cartItem.destroy();
+  //   })
+  //   .then(() => res.redirect("/cart"))
+  //   .catch((e) => console.log(e));
 
-//   req.user
-//     .getCart()
-//     .then((cart) => cart.getProducts({ where: id }))
-//     .then((products) => {
-//       const product = products[0];
-//       return product.cartItem.destroy();
-//     })
-//     .then(() => res.redirect("/cart"))
-//     .catch((e) => console.log(e));
-
-//   Product.getById(id, (product) => {
-//     Cart.deleteProduct(id, product.price);
-//     res.redirect("/cart");
-//   });
-// };
+  // Product.getById(id, (product) => {
+  //   Cart.deleteProduct(id, product.price);
+  //   res.redirect("/cart");
+  // });
+};
 
 // // ORDERS
 

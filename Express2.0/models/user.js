@@ -32,7 +32,6 @@ class User {
     const cartProductIndex = this.cart.items.findIndex((cartProduct) =>
       cartProduct.productId.equals(product._id)
     );
-    console.log("cartProductIndex", cartProductIndex);
 
     let newQuantity = 1;
     const updatedCartItems = [...this.cart.items];
@@ -76,6 +75,21 @@ class User {
             ).quantity,
           };
         })
+      );
+  };
+
+  deleteCartItem = (id) => {
+    const updatedCartItems = this.cart.items.filter(
+      (item) => item.productId.toString() !== id.toString()
+    );
+    const updatedCart = { items: updatedCartItems };
+
+    const database = getDB();
+    return database
+      .collection("users")
+      .updateOne(
+        { _id: mongodb.ObjectId(this._id) },
+        { $set: { cart: updatedCart } }
       );
   };
 
