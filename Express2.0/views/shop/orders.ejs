@@ -7,13 +7,13 @@
     <% if(orders.length <= 0 ) { %>
         <h1>Cart is empty!</h1>
     <% } else { %>
-        <ul>
+        <ul class="orders">
             <% orders.forEach(order => { %>
-                <li>
-                    <h1>Order #<%= order.id %></h1>
-                    <ul>
-                        <% order.products.forEach(product => { %>
-                            <li>
+                <li class="order__item">
+                    <h1>Order #<%= order._id %></h1>
+                    <ul class="order__products">
+                        <% order.items.forEach(product => { %>
+                            <li class="order__products-item">
                                 <%= product.title %> (<%= product.quantity %>)
                             </li>
                         <% }); %>
