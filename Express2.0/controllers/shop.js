@@ -65,34 +65,6 @@ exports.postCart = (req, res, next) => {
     });
 };
 
-// console.log("ID: ", id);
-// let fetchedCart;
-
-//   req.user
-//     .getCart()
-//     .then((cart) => cart.getProducts({ where: { id } }))
-//     .then((products) => {
-//       let product;
-//       let quantity = 1;
-
-//       if (products.length > 0) product = product[0];
-
-//       if (product) {
-//         const oldQuatity = product.cartItem.quantity;
-//         quantity += oldQuatity;
-//         return fetchedCart.addProduct(product, { through: { quantity } });
-//       }
-
-//       return Product.findByPk(id).then((prod) =>
-//         fetchedCart.addProduct(prod, { through: quantity })
-//       );
-//     })
-//     .then(() => {
-//       res.redirect("/cart");
-//     })
-//     .catch((e) => console.log);
-// };
-
 exports.postDeleteCartItem = (req, res, next) => {
   const id = req.body.productId;
 
@@ -100,21 +72,6 @@ exports.postDeleteCartItem = (req, res, next) => {
     console.log(`Product ID:${id} deleted.`);
     res.redirect("/cart");
   });
-
-  // req.user
-  //   .getCart()
-  //   .then((cart) => cart.getProducts({ where: id }))
-  //   .then((products) => {
-  //     const product = products[0];
-  //     return product.cartItem.destroy();
-  //   })
-  //   .then(() => res.redirect("/cart"))
-  //   .catch((e) => console.log(e));
-
-  // Product.getById(id, (product) => {
-  //   Cart.deleteProduct(id, product.price);
-  //   res.redirect("/cart");
-  // });
 };
 
 // // ORDERS
@@ -132,28 +89,9 @@ exports.postDeleteCartItem = (req, res, next) => {
 //     .catch((e) => console.log(e));
 // };
 
-// exports.postOrder = (req, res, next) => {
-//   let fetchedCart;
-//   req.user
-//     .getCart()
-//     .then((cart) => {
-//       fetchedCart = cart;
-//       return cart.getProducts();
-//     })
-//     .then((products) =>
-//       req.user
-//         .createOrder()
-//         .then((order) =>
-//           order.addProducts(
-//             products.map((product) => {
-//               product.orderItem = { quantity: product.cartItem.quantity };
-//               return product;
-//             })
-//           )
-//         )
-//         .catch((e) => console.log(e))
-//     )
-//     .then(() => fetchedCart.setProducts(null))
-//     .then(() => res.redirect("/orders"))
-//     .catch((e) => console.log(e));
-// };
+exports.postOrder = (req, res, next) => {
+  req.user
+    .addOrder()
+    .then(() => res.redirect("/orders"))
+    .catch((e) => console.log(e));
+};
