@@ -1,12 +1,13 @@
 const path = require("path");
 
 const express = require("express");
+const mongoose = require("mongoose");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const errorRoutes = require("./routes/error");
 
-const { mongoConnect } = require("./utils/database");
+// const { mongoConnect } = require("./utils/database");
 const User = require("./models/user");
 
 require("dotenv").config();
@@ -32,6 +33,11 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(errorRoutes);
 
-mongoConnect(() => {
-  app.listen(process.env.port);
-});
+mongoose
+  .connect(
+    "mongodb+srv://User:dbPassword@cluster0.p2zd6.mongodb.net/shop?retryWrites=true&w=majority"
+  )
+  .then((res) => {
+    app.listen(process.env.port);
+  })
+  .catch((err) => console.log(err));
