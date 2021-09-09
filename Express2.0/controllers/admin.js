@@ -23,16 +23,13 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  const id = null;
   const { title, price, description, imageUrl } = req.body;
-  const product = new Product(
+  const product = new Product({
     title,
     price,
     description,
     imageUrl,
-    id,
-    req.user._id
-  );
+  });
   product
     .save()
     .then(() => {
