@@ -3,6 +3,8 @@ const Product = require("../models/product");
 //PRODUCTS
 exports.getProducts = (req, res, next) => {
   Product.find()
+    // .select("price title -_id")
+    // .populate("userId")
     .then((products) => {
       res.render("admin/products", {
         products,
