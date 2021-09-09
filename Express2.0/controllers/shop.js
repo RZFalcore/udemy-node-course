@@ -3,7 +3,7 @@ const Product = require("../models/product");
 // INDEX PAGE
 
 exports.getShop = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
     .then((products) => {
       res.render("shop/index", { products, docTitle: "Shop", path: "/" });
     })
@@ -13,7 +13,7 @@ exports.getShop = (req, res, next) => {
 // PRODUCTS
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
     .then((products) => {
       res.render("shop/products-list", {
         products,
