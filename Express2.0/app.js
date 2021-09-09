@@ -38,6 +38,7 @@ mongoose
     "mongodb+srv://User:dbPassword@cluster0.p2zd6.mongodb.net/shop?retryWrites=true&w=majority"
   )
   .then((res) => {
+    console.log("Connected to db.");
     app.listen(process.env.port);
   })
   .catch((err) => console.log(err));
