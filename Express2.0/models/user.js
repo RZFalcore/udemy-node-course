@@ -110,22 +110,22 @@ module.exports = mongoose.model("User", userSchema);
 //   }
 
 //   getCart = () => {
-//     const database = getDB();
-//     const productsIds = this.cart.items.map((item) => item.productId);
-//     return database
-//       .collection("products")
-//       .find({ _id: { $in: productsIds } })
-//       .toArray()
-//       .then((products) =>
-//         products.map((product) => {
-//           return {
-//             ...product,
-//             quantity: this.cart.items.find(
-//               (item) => item.productId.toString() === product._id.toString()
-//             ).quantity,
-//           };
-//         })
-//       );
+    // const database = getDB();
+    // const productsIds = this.cart.items.map((item) => item.productId);
+    // return database
+    //   .collection("products")
+    //   .find({ _id: { $in: productsIds } })
+    //   .toArray()
+    //   .then((products) =>
+    //     products.map((product) => {
+    //       return {
+    //         ...product,
+    //         quantity: this.cart.items.find(
+    //           (item) => item.productId.toString() === product._id.toString()
+    //         ).quantity,
+    //       };
+    //     })
+    //   );
 //   };
 
 //   deleteCartItem = (id) => {
