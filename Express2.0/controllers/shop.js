@@ -95,12 +95,16 @@ exports.postOrder = (req, res, next) => {
       const products = user.cart.items.map((item) => {
         return { quantity: item.quantity, product: { ...item.productId._doc } };
       });
+      const totalPrice = products.reduce((acc, product) => {
+        return (acc += product.product.price * product.quantity);
+      }, 0);
       const order = new Order({
         user: {
           name: req.user.name,
           userId: req.user,
         },
         products,
+        totalPrice,
       });
       return order.save();
     })
